@@ -50,20 +50,23 @@ ProjectPulse is built on a modern, decoupled architecture:
 ## 🏗️ System Architecture
 
 The following diagram illustrates how the frontend React app, the Django backend, Jira servers, and the Groq AI service securely interact:
+## System Architecture
 
+![Architecture](./assets/architecture.png)
+
+## Sequence Diagram
+
+```mermaid
 sequenceDiagram
     participant User
-    participant API as Backend API
-    participant DB as SQLite / PostgreSQL
-    participant Jira as Jira
+    participant API
+    participant DB
 
-    User->>API: Send request
-    API->>DB: Save data
-    DB-->>API: Return result
-    API->>Jira: Create issue
-    Jira-->>API: Return issue ID
-    API-->>User: Response
----
+    User->>API: Request
+    API->>DB: Query
+    DB-->>API: Response
+    API-->>User: Result
+```
 
 ## 📂 Project Structure
 
