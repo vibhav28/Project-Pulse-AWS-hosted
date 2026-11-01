@@ -51,30 +51,18 @@ ProjectPulse is built on a modern, decoupled architecture:
 
 The following diagram illustrates how the frontend React app, the Django backend, Jira servers, and the Groq AI service securely interact:
 
-```mermaid
 sequenceDiagram
-    autonumber
-    actor User as User / Stakeholder
-    participant FE as React Frontend
-    participant BE as Django Backend
-    database DB as SQLite / PostgreSQL
-    participant Jira as Jira REST API
-    participant Groq as Groq AI (Llama 3)
+    participant User
+    participant API as Backend API
+    participant DB as SQLite / PostgreSQL
+    participant Jira as Jira
 
-    User->>FE: Ask question: "Show high-priority blocked issues"
-    FE->>BE: POST /api/chat/messages/ (with user message)
-    Note over BE: Validate JWT auth & check project permissions
-    BE->>DB: Retrieve Jira credentials (encrypted)
-    DB-->>BE: Decrypted credentials
-    BE->>Jira: Sync/fetch current issue logs (server-side)
-    Jira-->>BE: Return raw JSON issues list
-    Note over BE: Run Context Building Algorithm<br/>(Generate Markdown table of issues)
-    BE->>Groq: Request Chat Completion<br/>(Injected system prompt + context table + user message)
-    Groq-->>BE: Return analyzed natural language response
-    BE-->>FE: Return AI reply JSON
-    FE->>User: Display markdown response & update dynamic charts
-```
-
+    User->>API: Send request
+    API->>DB: Save data
+    DB-->>API: Return result
+    API->>Jira: Create issue
+    Jira-->>API: Return issue ID
+    API-->>User: Response
 ---
 
 ## 📂 Project Structure
