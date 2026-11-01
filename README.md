@@ -50,7 +50,6 @@ ProjectPulse is built on a modern, decoupled architecture:
 ## 🏗️ System Architecture
 
 The following diagram illustrates how the frontend React app, the Django backend, Jira servers, and the Groq AI service securely interact:
-## System Architecture
 
 
 ```mermaid
